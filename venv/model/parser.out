@@ -1,0 +1,190 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> expr
+Rule 1     expr -> VAR
+Rule 2     expr -> LAMBDA VAR DOT expr
+Rule 3     expr -> expr expr
+Rule 4     expr -> LPAREN expr RPAREN
+
+Terminals, with rules where they appear
+
+DOT                  : 2
+LAMBDA               : 2
+LPAREN               : 4
+RPAREN               : 4
+VAR                  : 1 2
+error                : 
+
+Nonterminals, with rules where they appear
+
+expr                 : 2 3 3 4 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expr
+    (1) expr -> . VAR
+    (2) expr -> . LAMBDA VAR DOT expr
+    (3) expr -> . expr expr
+    (4) expr -> . LPAREN expr RPAREN
+
+    VAR             shift and go to state 2
+    LAMBDA          shift and go to state 3
+    LPAREN          shift and go to state 4
+
+    expr                           shift and go to state 1
+
+state 1
+
+    (0) S' -> expr .
+    (3) expr -> expr . expr
+    (1) expr -> . VAR
+    (2) expr -> . LAMBDA VAR DOT expr
+    (3) expr -> . expr expr
+    (4) expr -> . LPAREN expr RPAREN
+
+    VAR             shift and go to state 2
+    LAMBDA          shift and go to state 3
+    LPAREN          shift and go to state 4
+
+    expr                           shift and go to state 5
+
+state 2
+
+    (1) expr -> VAR .
+
+    VAR             reduce using rule 1 (expr -> VAR .)
+    LAMBDA          reduce using rule 1 (expr -> VAR .)
+    LPAREN          reduce using rule 1 (expr -> VAR .)
+    $end            reduce using rule 1 (expr -> VAR .)
+    RPAREN          reduce using rule 1 (expr -> VAR .)
+
+
+state 3
+
+    (2) expr -> LAMBDA . VAR DOT expr
+
+    VAR             shift and go to state 6
+
+
+state 4
+
+    (4) expr -> LPAREN . expr RPAREN
+    (1) expr -> . VAR
+    (2) expr -> . LAMBDA VAR DOT expr
+    (3) expr -> . expr expr
+    (4) expr -> . LPAREN expr RPAREN
+
+    VAR             shift and go to state 2
+    LAMBDA          shift and go to state 3
+    LPAREN          shift and go to state 4
+
+    expr                           shift and go to state 7
+
+state 5
+
+    (3) expr -> expr expr .
+    (3) expr -> expr . expr
+    (1) expr -> . VAR
+    (2) expr -> . LAMBDA VAR DOT expr
+    (3) expr -> . expr expr
+    (4) expr -> . LPAREN expr RPAREN
+
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for LAMBDA resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+    $end            reduce using rule 3 (expr -> expr expr .)
+    RPAREN          reduce using rule 3 (expr -> expr expr .)
+    VAR             shift and go to state 2
+    LAMBDA          shift and go to state 3
+    LPAREN          shift and go to state 4
+
+  ! VAR             [ reduce using rule 3 (expr -> expr expr .) ]
+  ! LAMBDA          [ reduce using rule 3 (expr -> expr expr .) ]
+  ! LPAREN          [ reduce using rule 3 (expr -> expr expr .) ]
+
+    expr                           shift and go to state 5
+
+state 6
+
+    (2) expr -> LAMBDA VAR . DOT expr
+
+    DOT             shift and go to state 8
+
+
+state 7
+
+    (4) expr -> LPAREN expr . RPAREN
+    (3) expr -> expr . expr
+    (1) expr -> . VAR
+    (2) expr -> . LAMBDA VAR DOT expr
+    (3) expr -> . expr expr
+    (4) expr -> . LPAREN expr RPAREN
+
+    RPAREN          shift and go to state 9
+    VAR             shift and go to state 2
+    LAMBDA          shift and go to state 3
+    LPAREN          shift and go to state 4
+
+    expr                           shift and go to state 5
+
+state 8
+
+    (2) expr -> LAMBDA VAR DOT . expr
+    (1) expr -> . VAR
+    (2) expr -> . LAMBDA VAR DOT expr
+    (3) expr -> . expr expr
+    (4) expr -> . LPAREN expr RPAREN
+
+    VAR             shift and go to state 2
+    LAMBDA          shift and go to state 3
+    LPAREN          shift and go to state 4
+
+    expr                           shift and go to state 10
+
+state 9
+
+    (4) expr -> LPAREN expr RPAREN .
+
+    VAR             reduce using rule 4 (expr -> LPAREN expr RPAREN .)
+    LAMBDA          reduce using rule 4 (expr -> LPAREN expr RPAREN .)
+    LPAREN          reduce using rule 4 (expr -> LPAREN expr RPAREN .)
+    $end            reduce using rule 4 (expr -> LPAREN expr RPAREN .)
+    RPAREN          reduce using rule 4 (expr -> LPAREN expr RPAREN .)
+
+
+state 10
+
+    (2) expr -> LAMBDA VAR DOT expr .
+    (3) expr -> expr . expr
+    (1) expr -> . VAR
+    (2) expr -> . LAMBDA VAR DOT expr
+    (3) expr -> . expr expr
+    (4) expr -> . LPAREN expr RPAREN
+
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for LAMBDA resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+    $end            reduce using rule 2 (expr -> LAMBDA VAR DOT expr .)
+    RPAREN          reduce using rule 2 (expr -> LAMBDA VAR DOT expr .)
+    VAR             shift and go to state 2
+    LAMBDA          shift and go to state 3
+    LPAREN          shift and go to state 4
+
+  ! VAR             [ reduce using rule 2 (expr -> LAMBDA VAR DOT expr .) ]
+  ! LAMBDA          [ reduce using rule 2 (expr -> LAMBDA VAR DOT expr .) ]
+  ! LPAREN          [ reduce using rule 2 (expr -> LAMBDA VAR DOT expr .) ]
+
+    expr                           shift and go to state 5
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for VAR in state 5 resolved as shift
+WARNING: shift/reduce conflict for LAMBDA in state 5 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 5 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 10 resolved as shift
+WARNING: shift/reduce conflict for LAMBDA in state 10 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 10 resolved as shift
