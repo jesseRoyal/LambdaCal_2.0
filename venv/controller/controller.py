@@ -8,7 +8,7 @@ class LambdaCalcController:
     def __init__(self, view):
         self.view = view
         self.view.set_eval_button_command(self.evaluate_expression)
-        openai.api_key = OPENAI_API_KEY
+        #openai.api_key = OPENAI_API_KEY
 
     def evaluate_expression(self):
         expression = self.view.get_expression()
